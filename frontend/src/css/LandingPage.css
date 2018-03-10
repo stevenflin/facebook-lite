@@ -1,0 +1,31 @@
+#sign-in-form {
+}
+
+.sign-in-form-field {
+  color: white;
+  margin: 0 .5vw;
+  width: 30%;
+}
+
+.main {
+  padding: 0 12vw;
+}
+
+.main-icon {
+  transform: scale(1.8);
+  margin-right: 20px;
+}
+
+#welcome-text {
+  margin-top: 7vh;
+}
+
+.sign-up-form {
+  margin-top: 2vh;
+}
+
+.sign-up-form-field-half {
+}
+
+.sign-up-form-field {
+}

@@ -11,6 +11,8 @@ import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
 import NavBar from './NavBar';
 import SideBar from './SideBar';
 
+import '../../css/Newsfeed.css';
+
 export default class NewsfeedPage extends Component {
   render() {
     return <NewsfeedPagePresentation />;
@@ -22,20 +24,22 @@ class NewsfeedPagePresentation extends Component {
 	  return (
 	  	<div>
 	  		<NavBar />
-	  		<Row className='newsfeed-main'>
-	  			<Col md={2}>
-	  				<SideBar />
-	  			</Col>
-	  			<Col md={7}>
-	  				<Newsfeed />
-	  			</Col>
-	  		</Row>
+	  		<div className='newsfeed-main p10'>
+		  		<Row>
+		  			<Col md={2}>
+		  				<SideBar />
+		  			</Col>
+		  			<Col md={7}>
+		  				<Newsfeed />
+		  			</Col>
+		  		</Row>
+		  	</div>
 	  		<Drawer 
 					open={true} 
 					openSecondary={true} 
 					width={200} 
-					containerStyle={{height: '89.55vh', top: '10.45vh', boxShadow: 'none', borderLeft: '1px solid #d3d3d3'}}>
-
+					containerStyle={{height: '89.55vh', top: '10.45vh', boxShadow: 'none', borderLeft: '1px solid #d3d3d3'}}
+				>
         </Drawer>
 	  	</div>
 	  	);
@@ -85,12 +89,12 @@ class NewsfeedPost extends Component {
 					<hr/>
 					<Row className='reset-spacing'>
 						<Col md={6} className='text-align-center'>
-							<FavoriteBorder style={{transform: 'scale(.75)', verticalAlign:'middle'}}/>
-							<span className='fss' style={{verticalAlign:'middle'}}> Like</span>
+							<FavoriteBorder className='vam' style={{transform: 'scale(.75)'}}/>
+							<span className='fss vam'> Like</span>
 						</Col>
 						<Col md={6} className='text-align-center'>
-							<ChatBubbleOutline style={{transform: 'scale(.75)', verticalAlign:'middle'}}/>
-							<span className='fss' style={{verticalAlign:'middle'}}> Comment</span>
+							<ChatBubbleOutline className='vam' style={{transform: 'scale(.75)'}}/>
+							<span className='fss vam'> Comment</span>
 						</Col>
 					</Row>
 				</Paper>
@@ -103,7 +107,11 @@ class NewsfeedPost extends Component {
 class Comments extends Component {
 	render() {
 		return (
-			<Paper zDepth={1} className='newsfeed-post' style={{backgroundColor: '#fafafa', height: 10, width: '100%'}}>
+			<Paper 
+				zDepth={1} 
+				className='newsfeed-post' 
+				style={{backgroundColor: '#fafafa', height: 10, width: '100%'}}
+			>
 				
 			</Paper>
 			)

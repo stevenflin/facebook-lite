@@ -1,0 +1,18 @@
+.login-form {
+  padding: 5vh;
+  background-color: #fafafa;
+  margin-top: 10vh;
+}
+
+.login-form-break {
+	width: 50%;
+	height: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(0, 0, 0,	0.3);
+	text-align: center;
+}
+
+.login-form-break-text {
+	background-color: #fafafa;
+	color: rgba(0, 0, 0, 0.3);
+}

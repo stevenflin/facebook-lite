@@ -120,140 +120,160 @@ class SignUpForm extends Component {
 		usernameErrorMessage = (this.state.populateErrors && this.isUsernameEmpty()) ? 'Field is required' : usernameErrorMessage;
 		
 		return (
-				<Col md={5} className='sign-up-form'>
-					<Row><h2>Sign Up</h2></Row>
-					<Row><p className='reset-spacing' style={{fontSize:'larger'}}>It’s free and always will be.</p></Row>
-					<Row>
-						<TextField
-							className='sign-up-form-field-half'      
-							type='text'
-							value={this.state.newUser.firstName}
-							onChange={this.onFirstNameChange}
-							errorText={(this.state.populateErrors && this.isFirstNameEmpty()) ? 'Field is required' : ''}
-				      floatingLabelText='First Name'
-				      floatingLabelFocusStyle={{color: (this.state.populateErrors && this.isFirstNameEmpty()) ? 'rgb(244, 67, 54)' : '#4885ed'}}
-				      floatingLabelStyle={{color:(this.isFirstNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      underlineFocusStyle={{borderColor: '#4885ed'}}
-				      underlineStyle={{borderColor:(this.isFirstNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      inputStyle={{fontSize:'small'}}
-				      style={{width: '47.5%', marginRight: '5%'}}
-				    />
-						<TextField
-							className='sign-up-form-field-half'
-							type='text'
-							value={this.state.newUser.lastName}
-							onChange={this.onLastNameChange}
-							errorText={(this.state.populateErrors && this.isLastNameEmpty()) ? 'Field is required' : ''}
-				      floatingLabelText='Last Name'
-				      floatingLabelFocusStyle={{color: (this.state.populateErrors && this.isLastNameEmpty()) ? 'rgb(244, 67, 54)' : '#4885ed'}}
-				      floatingLabelStyle={{color:(this.isLastNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      underlineFocusStyle={{borderColor: '#4885ed'}}
-				      underlineStyle={{borderColor:(this.isLastNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      inputStyle={{fontSize:'small'}}
-				      style={{width: '47.5%'}}
-				    />
-				  </Row>
-				  <Row>
-						<TextField
-							className='sign-up-form-field'      
-							type='text'
-							value={this.state.newUser.username}
-							onChange={this.onUsernameChange}
-							onBlur={this.checkIfUsernameExists}
-							errorText={usernameErrorMessage}
-				      floatingLabelText='Username'
-				      floatingLabelStyle={{color:(this.isUsernameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      floatingLabelShrinkStyle={{color:((this.state.populateErrors && this.isUsernameEmpty()) || this.state.isUsernameTaken) ? 'rgb(244, 67, 54)' : '#4885ed'}}
-				      underlineFocusStyle={{borderColor: '#4885ed'}}
-				      underlineStyle={{borderColor:(this.isUsernameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      inputStyle={{fontSize:'small'}}
-				      style={{width: '100%'}}
-				    />
-				  </Row>
-				  <Row>
-						<TextField
-							className='sign-up-form-field'      
-							type='password'
-							value={this.state.newUser.password}
-							onChange={this.onPasswordChange}
-							errorText={(this.state.populateErrors && this.isPasswordEmpty()) ? 'Field is required' : ''}
-				      floatingLabelText='New Password'
-				      floatingLabelFocusStyle={{color: (this.state.populateErrors && this.isPasswordEmpty()) ? 'rgb(244, 67, 54)' : '#4885ed'}}
-				      floatingLabelStyle={{color:(this.isPasswordEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      underlineFocusStyle={{borderColor: '#4885ed'}}
-				      underlineStyle={{borderColor:(this.isPasswordEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
-				      inputStyle={{fontSize:'small'}}
-				      style={{width: '100%'}}
-				    />
-				  </Row>
-				  <br/>
-				  <Row>
-				  	<Col className='reset-spacing' md={4} style={{fontSize:'larger'}}>Birthday </Col>
-				  	<Col md={6} style={{fontSize:'x-small'}}><a href='#' onClick={this.handleBdayTip}>Why do I need to provide my birthday?</a></Col>
-				  	<Popover
-		          open={this.state.open}
-		          anchorEl={this.state.anchorEl}
-		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-		          onRequestClose={this.handleRequestClose}
-		        >
-		          <p style={{fontSize:'small',padding:'10px'}}>
-		          	<strong>Providing your birthday</strong> helps make sure you <br/>
-		          	get the right Facebook experience for your age. <br/>
-		          	If you want to change who sees this, go to the <br/>
-		          	About section of your profile. For more details, <br/>
-		          	please visit our <a href='#'>Data Policy</a>.
-		          </p>
-		        </Popover>
-				  </Row>
-				  <Row>
-				  	<div>
-					  	<DropDownMenu style={{width:105,fontSize:'small'}} autoWidth={false} value={this.state.newUser.month} onChange={this.handleMonthChange}>
-				        {months.map((month,index) => <MenuItem key={index} value={index+1} primaryText={month} />)}
-				      </DropDownMenu>
-				      <DropDownMenu style={{width:100,fontSize:'small'}} autoWidth={false} value={this.state.newUser.date} onChange={this.handleDateChange}>
-				        {dates.map((date,index) => <MenuItem key={index} value={date} primaryText={date} />)}
-				      </DropDownMenu>
-				      <DropDownMenu style={{width:125,fontSize:'small'}} autoWidth={false} value={this.state.newUser.year} onChange={this.handleYearChange}>
-				        {years.map((year,index) => <MenuItem key={index} value={year} primaryText={year} />)}
-				      </DropDownMenu>
-			      </div>
-				  </Row>
-				  <Row>
-					  <RadioButtonGroup style={{display:'flex'}} name='gender-picker' onChange={this.handleGenderChange}>
-				      <RadioButton
-				        value='male'
-				        label='Male'
-				        style={{width:'auto',marginRight:'2vw'}}
-	 			        iconStyle={{fill:maleButtonColor}}
-				      />
-				      <RadioButton
-				        value='female'
-				        label='Female'
-				        style={{width:'auto',marginRight:'2vw'}}
-								iconStyle={{fill:femaleButtonColor}}
-				      />
-				    </RadioButtonGroup>
-				    {(this.state.populateErrors && this.isGenderEmpty()) ? <p style={{fontSize:'x-small',color:'rgb(244, 67, 54)'}}> *Field is required</p> : null}
-				  </Row>
-				  <Row>
-				  	<p style={{fontSize:'xx-small'}}>
-				  		By clicking Create Account, you agree to our <a href='#'>Terms</a> and that <br/>
-				  		you have read our <a href='#'>Data Policy</a>, including our <a href='#'>Cookie Use</a>. You <br/>
-				  		may receive SMS Notifications from Facebook and can opt out <br/>
-				  		at any time.
-				  	</p>
-				  </Row>
-				  <Row>
-				  	<RaisedButton 
-							label='Create Account' 
-							onClick={this.saveUser}
-							backgroundColor='#4285f4'
-							labelColor='white'
-							style={{height:50}}
-				    />
-				  </Row>
-				</Col>
+			<div className='sign-up-form'>
+				<Row><h2>Sign Up</h2></Row>
+				<Row><p className='reset-spacing fsl'>It’s free and always will be.</p></Row>
+				<Row>
+					<TextField
+						className='sign-up-form-field-half'      
+						type='text'
+						value={this.state.newUser.firstName}
+						onChange={this.onFirstNameChange}
+						errorText={(this.state.populateErrors && this.isFirstNameEmpty()) ? 'Field is required' : ''}
+			      floatingLabelText='First Name'
+			      floatingLabelFocusStyle={{color: (this.state.populateErrors && this.isFirstNameEmpty()) ? 'rgb(244, 67, 54)' : '#4885ed'}}
+			      floatingLabelStyle={{color:(this.isFirstNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      underlineFocusStyle={{borderColor: '#4885ed'}}
+			      underlineStyle={{borderColor:(this.isFirstNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      inputStyle={{fontSize:'small'}}
+			      style={{width: '47.5%', marginRight: '5%'}}
+			    />
+					<TextField
+						className='sign-up-form-field-half'
+						type='text'
+						value={this.state.newUser.lastName}
+						onChange={this.onLastNameChange}
+						errorText={(this.state.populateErrors && this.isLastNameEmpty()) ? 'Field is required' : ''}
+			      floatingLabelText='Last Name'
+			      floatingLabelFocusStyle={{color: (this.state.populateErrors && this.isLastNameEmpty()) ? 'rgb(244, 67, 54)' : '#4885ed'}}
+			      floatingLabelStyle={{color:(this.isLastNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      underlineFocusStyle={{borderColor: '#4885ed'}}
+			      underlineStyle={{borderColor:(this.isLastNameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      inputStyle={{fontSize:'small'}}
+			      style={{width: '47.5%'}}
+			    />
+			  </Row>
+			  <Row>
+					<TextField
+						className='sign-up-form-field'      
+						type='text'
+						value={this.state.newUser.username}
+						onChange={this.onUsernameChange}
+						onBlur={this.checkIfUsernameExists}
+						errorText={usernameErrorMessage}
+			      floatingLabelText='Username'
+			      floatingLabelStyle={{color:(this.isUsernameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      floatingLabelShrinkStyle={{color:((this.state.populateErrors && this.isUsernameEmpty()) || this.state.isUsernameTaken) ? 'rgb(244, 67, 54)' : '#4885ed'}}
+			      underlineFocusStyle={{borderColor: '#4885ed'}}
+			      underlineStyle={{borderColor:(this.isUsernameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      inputStyle={{fontSize:'small'}}
+			      style={{width: '100%'}}
+			    />
+			  </Row>
+			  <Row>
+					<TextField
+						className='sign-up-form-field'      
+						type='password'
+						value={this.state.newUser.password}
+						onChange={this.onPasswordChange}
+						errorText={(this.state.populateErrors && this.isPasswordEmpty()) ? 'Field is required' : ''}
+			      floatingLabelText='New Password'
+			      floatingLabelFocusStyle={{color: (this.state.populateErrors && this.isPasswordEmpty()) ? 'rgb(244, 67, 54)' : '#4885ed'}}
+			      floatingLabelStyle={{color:(this.isPasswordEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      underlineFocusStyle={{borderColor: '#4885ed'}}
+			      underlineStyle={{borderColor:(this.isPasswordEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+			      inputStyle={{fontSize:'small'}}
+			      style={{width: '100%'}}
+			    />
+			  </Row>
+			  <br/>
+			  <Row>
+			  	<Col className='reset-spacing fsl' md={4}>Birthday </Col>
+			  	<Col className='fsxs' md={6}>
+			  		<a href='#' onClick={this.handleBdayTip}>Why do I need to provide my birthday?</a>
+			  	</Col>
+			  	<Popover
+	          open={this.state.open}
+	          anchorEl={this.state.anchorEl}
+	          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+	          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+	          onRequestClose={this.handleRequestClose}
+	        >
+	          <p className='fss p10'>
+	          	<strong>Providing your birthday</strong> helps make sure you <br/>
+	          	get the right Facebook experience for your age. <br/>
+	          	If you want to change who sees this, go to the <br/>
+	          	About section of your profile. For more details, <br/>
+	          	please visit our <a href='#'>Data Policy</a>.
+	          </p>
+	        </Popover>
+			  </Row>
+			  <Row>
+			  	<div>
+				  	<DropDownMenu 
+				  		style={{width:105,fontSize:'small'}} 
+				  		autoWidth={false} 
+				  		value={this.state.newUser.month}
+				  		 onChange={this.handleMonthChange}
+				  		>
+			        {months.map((month,index) => <MenuItem key={index} value={index+1} primaryText={month} />)}
+			      </DropDownMenu>
+			      <DropDownMenu 
+			      	style={{width:100,fontSize:'small'}} 
+			      	autoWidth={false} 
+			      	value={this.state.newUser.date} 
+			      	onChange={this.handleDateChange}
+			      >
+			        {dates.map((date,index) => <MenuItem key={index} value={date} primaryText={date} />)}
+			      </DropDownMenu>
+			      <DropDownMenu 
+			      	style={{width:125,fontSize:'small'}} 
+			      	autoWidth={false} 
+			      	value={this.state.newUser.year} 
+			      	onChange={this.handleYearChange}
+			      >
+			        {years.map((year,index) => <MenuItem key={index} value={year} primaryText={year} />)}
+			      </DropDownMenu>
+		      </div>
+			  </Row>
+			  <Row>
+				  <RadioButtonGroup style={{display:'flex'}} name='gender-picker' onChange={this.handleGenderChange}>
+			      <RadioButton
+			        value='male'
+			        label='Male'
+			        style={{width:'auto',marginRight:'2vw'}}
+ 			        iconStyle={{fill:maleButtonColor}}
+			      />
+			      <RadioButton
+			        value='female'
+			        label='Female'
+			        style={{width:'auto',marginRight:'2vw'}}
+							iconStyle={{fill:femaleButtonColor}}
+			      />
+			    </RadioButtonGroup>
+			    {(this.state.populateErrors && this.isGenderEmpty()) 
+			    	? <p className='fsxs input-error'> *Field is required</p> 
+			    	: null
+			    }
+			  </Row>
+			  <Row>
+			  	<p className='fsxs'>
+			  		By clicking Create Account, you agree to our <a href='#'>Terms</a> and that <br/>
+			  		you have read our <a href='#'>Data Policy</a>, including our <a href='#'>Cookie Use</a>. You <br/>
+			  		may receive SMS Notifications from Facebook and can opt out <br/>
+			  		at any time.
+			  	</p>
+			  </Row>
+			  <Row>
+			  	<RaisedButton 
+						label='Create Account' 
+						onClick={this.saveUser}
+						backgroundColor='#4285f4'
+						labelColor='white'
+						style={{height:50}}
+			    />
+			  </Row>
+			</div>
 			);
 	};
 };

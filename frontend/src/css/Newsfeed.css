@@ -1,0 +1,22 @@
+.newsfeed-main {
+}
+
+.nav {
+  width: 100vw;
+  height: 10vh;
+  background-color: #fafafa;
+  box-shadow: 0 4px 2px -2px lightgray;
+}
+
+.side-bar {
+  padding: 0 2vw;
+  font-size: small;
+}
+
+.newsfeed-post-new {
+  padding: 0 2vh 2vh 2vh;
+}
+
+.newsfeed-post {
+  padding: 2vh;
+}

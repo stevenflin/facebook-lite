@@ -7,10 +7,12 @@ import Logo from '../../Reusable/Logo';
 export default class Header extends Component {
 	render() {
 		return (
-			<Row className='header'>
-				<Logo />
-				<SignInForm />
-			</Row>
+			<div className='header'>
+				<Row>
+					<Logo />
+					<SignInForm />
+				</Row>
+			</div>
 			);
 	};
 };

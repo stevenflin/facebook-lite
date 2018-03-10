@@ -1,0 +1,40 @@
+.reset-spacing {
+  padding: 0;
+  margin: 0;
+}
+
+.fsxs {
+	font-size: x-small;
+}
+
+.fss {
+  font-size: small;
+}
+
+.fsl {
+	font-size: large;
+}
+
+.p10 {
+	padding: 10px;
+}
+
+.ph10 {
+	padding: 0 10px;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.hc {
+	margin: 0 auto;
+}
+
+.input-error {
+	color: rgb(244, 67, 54);
+}

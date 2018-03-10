@@ -1,0 +1,14 @@
+body {
+  color: #545454;
+}
+
+hr {
+  margin: 5px 0;
+}
+
+/*Landing Page*/
+.header {
+  width: 100vw;
+  height: 14vh;
+  background-color: #fafafa;
+}

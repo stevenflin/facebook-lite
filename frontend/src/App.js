@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import './App.css';
+import './css/App.css';
+import './css/SpacingAndSizing.css';
 
 // Material-UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
