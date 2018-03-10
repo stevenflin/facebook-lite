@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux'
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -8,6 +9,12 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+
+import { checkIfUsernameExists, saveUser } from '../../../redux/asyncActions';
+
+let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+let dates = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+let years = [1991,1992,1993,1994,1995,1996];
 
 class SignUpForm extends Component {
 	constructor(props) {
@@ -71,18 +78,16 @@ class SignUpForm extends Component {
   isUsernameEmpty = () => this.state.newUser.username === '';
 
   checkIfUsernameExists = () => {
-  	fetch(process.env.REACT_APP_API_URL + `/users/usernames/${this.state.newUser.username}`, {
-  		method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-  	})
-  	.then(resp => resp.json())
-  	.then(resp => {
-  		if(resp.success) {
-  			this.setState({isUsernameTaken: resp.exists});
-  		};
-  	});
+  	let username = this.state.newUser.username;
+  	if(username !== '') {
+  		this.props.checkIfUsernameExists(username)
+	  	.then(resp => resp.json())
+	  	.then(resp => {
+	  		if(resp.success) {
+	  			this.setState({isUsernameTaken: resp.exists});
+	  		};
+	  	});
+	  }
   };
 
   isPasswordEmpty = () => this.state.newUser.password === '';
@@ -90,13 +95,7 @@ class SignUpForm extends Component {
   isGenderEmpty = () => this.state.newUser.gender === '';
 
   saveUser = () => {
-  	fetch(process.env.REACT_APP_API_URL + '/users/new', {
-  		method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state.newUser),
-  	})
+  	this.props.saveUser(this.state.newUser)
   	.then(resp => resp.json())
   	.then(resp => {
   		if(!resp.success) {
@@ -110,9 +109,6 @@ class SignUpForm extends Component {
   };
 
 	render() {
-		var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-		var dates = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
-		var years = [1991,1992,1993,1994,1995,1996];
 
 		var maleButtonColor = (this.state.newUser.gender === 'male') ? '#4885ed' : 'gray'
 		var femaleButtonColor = (this.state.newUser.gender === 'female') ? '#4885ed' : 'gray'
@@ -122,12 +118,6 @@ class SignUpForm extends Component {
 
 		var usernameErrorMessage = (this.state.isUsernameTaken) ? 'Username taken' : '';
 		usernameErrorMessage = (this.state.populateErrors && this.isUsernameEmpty()) ? 'Field is required' : usernameErrorMessage;
-
-		var usernameFloatingTextColor = 'rgba(0, 0, 0, 0.3)';
-		if((this.state.populateErrors && this.isUsernameEmpty()) || this.state.isUsernameTaken)
-			usernameFloatingTextColor = 'rgb(244, 67, 54)';
-		else if(!this.isUsernameEmpty()) 
-			usernameFloatingTextColor = '#4885ed';
 		
 		return (
 				<Col md={5} className='sign-up-form'>
@@ -172,8 +162,8 @@ class SignUpForm extends Component {
 							onBlur={this.checkIfUsernameExists}
 							errorText={usernameErrorMessage}
 				      floatingLabelText='Username'
-				      floatingLabelFocusStyle={{color: ((this.state.populateErrors && this.isUsernameEmpty()) || this.state.isUsernameTaken) ? 'rgb(244, 67, 54)' : '#4885ed'}}
-				      floatingLabelStyle={{color:usernameFloatingTextColor}}
+				      floatingLabelStyle={{color:(this.isUsernameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
+				      floatingLabelShrinkStyle={{color:((this.state.populateErrors && this.isUsernameEmpty()) || this.state.isUsernameTaken) ? 'rgb(244, 67, 54)' : '#4885ed'}}
 				      underlineFocusStyle={{borderColor: '#4885ed'}}
 				      underlineStyle={{borderColor:(this.isUsernameEmpty()) ? 'rgba(0, 0, 0, 0.3)' : '#4885ed'}}
 				      inputStyle={{fontSize:'small'}}
@@ -267,6 +257,19 @@ class SignUpForm extends Component {
 			);
 	};
 };
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    checkIfUsernameExists: (username) => dispatch(checkIfUsernameExists(username)),
+    saveUser: (user) => dispatch(saveUser(user)),
+  };
+};
+
+SignUpForm = connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
 
 SignUpForm = withRouter(SignUpForm);
 

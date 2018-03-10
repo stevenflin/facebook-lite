@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux'
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+
+import { logIn } from '../../../redux/asyncActions';
 
 class SignInForm extends Component {
 
@@ -24,13 +27,7 @@ class SignInForm extends Component {
   isPasswordEmpty = () => this.state.password === '';
 
   logIn = () => {
-  	fetch(process.env.REACT_APP_API_URL + '/users/login', {
-  		method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({username: this.state.username, password: this.state.password}),
-  	})
+  	this.props.logIn(this.state.username, this.state.password)
   	.then(resp => resp.json())
   	.then(resp => {
   		if(resp.success) this.props.history.push('/newsfeed');
@@ -75,6 +72,14 @@ class SignInForm extends Component {
 			);
 	};
 };
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  logIn: (username, password) => dispatch(logIn(username, password)),
+});
+
+SignInForm = connect(mapStateToProps, mapDispatchToProps)(SignInForm);
 
 SignInForm = withRouter(SignInForm);
 

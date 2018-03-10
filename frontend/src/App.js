@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import './App.css';
 
 // Material-UI
@@ -9,11 +12,17 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import LandingPage from './components/LandingPage/index';
 import Newsfeed from './components/Newsfeed/index';
 
+import reducers from './redux/reducers';
+
+let store = createStore(reducers, applyMiddleware(thunk));
+
 class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-      	<Routes />
+      	<Provider store={store}>
+      		<Routes />
+      	</Provider>
       </MuiThemeProvider>
     	);
   };
