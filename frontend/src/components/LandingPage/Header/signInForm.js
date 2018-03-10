@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
+import { withRouter } from 'react-router';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class SignInForm extends Component {
-	render() {
-		return <SignInFormPresentation />;
-	};
-};
+class SignInForm extends Component {
 
-class SignInFormPresentation extends Component {
 	constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +32,9 @@ class SignInFormPresentation extends Component {
       body: JSON.stringify({username: this.state.username, password: this.state.password}),
   	})
   	.then(resp => resp.json())
-  	.then(resp => console.log(resp));
+  	.then(resp => {
+  		if(resp.success) this.props.history.push('/newsfeed');
+  	});
   };
 
 	render() {
@@ -77,3 +75,7 @@ class SignInFormPresentation extends Component {
 			);
 	};
 };
+
+SignInForm = withRouter(SignInForm);
+
+export default SignInForm;

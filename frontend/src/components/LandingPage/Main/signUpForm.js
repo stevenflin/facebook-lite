@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { withRouter } from 'react-router';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -8,7 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
-export default class SignUpForm extends Component {
+class SignUpForm extends Component {
 	constructor(props) {
     super(props);
     this.state = {
@@ -100,6 +101,10 @@ export default class SignUpForm extends Component {
   	.then(resp => {
   		if(!resp.success) {
   			this.setState({populateErrors: true});
+  		}
+  		else
+  		{
+  			this.props.history.push('/newsfeed');
   		};
   	});
   };
@@ -260,5 +265,9 @@ export default class SignUpForm extends Component {
 				  </Row>
 				</Col>
 			);
-	}
-}
+	};
+};
+
+SignUpForm = withRouter(SignUpForm);
+
+export default SignUpForm;
