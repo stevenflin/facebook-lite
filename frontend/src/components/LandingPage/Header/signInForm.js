@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { logIn } from '../../../redux/asyncActions';
+import { logIn, checkIfUsernameExists } from '../../../redux/asyncActions';
 
 class SignInForm extends Component {
 
@@ -27,11 +27,48 @@ class SignInForm extends Component {
   isPasswordEmpty = () => this.state.password === '';
 
   logIn = () => {
-  	this.props.logIn(this.state.username, this.state.password)
+  	let { username, password } = this.state;
+  	let { checkIfUsernameExists, logIn, history } = this.props;
+
+  	if(username === '') history.push({
+			pathname: '/login',
+			state: {
+				error: 'username', 
+				message: 'Username doesn\'t match any account.',
+				username,
+			},
+		});
+
+  	checkIfUsernameExists(username)
   	.then(resp => resp.json())
   	.then(resp => {
-  		if(resp.success) this.props.history.push('/newsfeed');
-  	});
+  		if(resp.success) {
+  			if(!resp.exists) history.push({
+  				pathname: '/login',
+  				state: {
+  					error: 'username', 
+  					message: 'Username doesn\'t match any account.',
+  					username,
+  				},
+  			});
+  			else {
+  				logIn(username, password)
+			  	.then(resp => resp.json())
+			  	.then(resp => {
+			  		if(resp.success) history.push('/newsfeed');
+			  		else history.push({
+			  			pathname: '/login',
+			  			state: {
+			  				error: 'password', 
+			  				message: 'Incorrect password.',
+			  				username,
+			  				password,
+			  			},
+			  		});
+			  	});
+  			}
+  		};
+	  });
   };
 
 	render() {
@@ -76,6 +113,7 @@ class SignInForm extends Component {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
+	checkIfUsernameExists: (username) => dispatch(checkIfUsernameExists(username)),
   logIn: (username, password) => dispatch(logIn(username, password)),
 });
 

@@ -26,7 +26,11 @@ const UserService = {
 			.then(user => {
 				(user) 
 				? resolve({success: true, body: user}) 
-				: resolve({success: false, error: {message: 'Incorrect username or password'}});
+				: resolve({
+					success: false, 
+					error: { message: 'Incorrect username or password' },
+					credentials: { username, password },
+				});
 			})
 			.catch(error => reject({success: false, error}));
 		});

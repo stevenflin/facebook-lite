@@ -71,6 +71,18 @@
 .sign-up-form-field {
 }
 
+/*Login Page*/
+.login-form {
+  margin: 0 auto;
+  padding: 5vh;
+  background-color: #fafafa;
+  margin-top: 10vh;
+}
+
+.login-form-content {
+  margin: 0 auto;
+}
+
 .reset-spacing {
   padding: 0;
   margin: 0;

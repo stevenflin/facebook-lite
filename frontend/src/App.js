@@ -10,6 +10,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // Components
 import LandingPage from './components/LandingPage/index';
+import Login from './components/Login/index';
 import Newsfeed from './components/Newsfeed/index';
 
 import reducers from './redux/reducers';
@@ -34,6 +35,7 @@ class Routes extends Component {
 				<Router>
       		<div>
 			      <Route exact path='/' component={LandingPage} />
+            <Route path ='/login' component={Login} />
 			      <Route path='/newsfeed' component={Newsfeed} />
 			    </div>
 			  </Router>
