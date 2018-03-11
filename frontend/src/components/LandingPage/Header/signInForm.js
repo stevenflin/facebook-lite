@@ -55,7 +55,7 @@ class SignInForm extends Component {
   				logIn(username, password)
 			  	.then(resp => resp.json())
 			  	.then(resp => {
-			  		if(resp.success) history.push('/newsfeed');
+			  		if(resp.success) history.push(`/newsfeed/${resp.body._id}`);
 			  		else history.push({
 			  			pathname: '/login',
 			  			state: {

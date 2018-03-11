@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row } from 'react-bootstrap';
 
-import SignInForm from './signInForm';
+import SignInForm from './SignInForm';
 import Logo from '../../Reusable/Logo';
 
 export default class Header extends Component {

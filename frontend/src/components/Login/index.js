@@ -37,7 +37,7 @@ class Login extends Component {
   	this.props.logIn(this.state.username, this.state.password)
   	.then(resp => resp.json())
   	.then(resp => {
-  		if(resp.success) this.props.history.push('/newsfeed');
+  		if(resp.success) this.props.history.push(`/newsfeed/${resp.body._id}`);
   		else this.props.history.push('/login');
   	});
   };

@@ -32,3 +32,26 @@ export const logIn = (username, password) => {
   	})
   };
 };
+
+export const getNewsfeed = (userId) => {
+	return dispatch => {
+		return fetch(`${process.env.REACT_APP_API_URL}/posts`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+	};
+};
+
+export const post = (content) => {
+	return dispatch => {
+		return fetch(`${process.env.REACT_APP_API_URL}/posts/new`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(content),
+		})
+	};
+};

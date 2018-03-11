@@ -1,14 +1,23 @@
 import { combineReducers } from 'redux';
+import {
+	LOAD_NEWSFEED
+} from './actionTypes';
 
-function placeholder(state = [], action) {
+const initialState = {
+	newsfeed: [],
+}
+
+function newsfeedReducer(state = initialState.newsfeed, action) {
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter;
+    case LOAD_NEWSFEED:
+      return action.newsfeed;
     default:
       return state;
   };
 };
 
-const reducers = combineReducers({placeholder});
+const reducers = combineReducers({
+	newsfeed: newsfeedReducer
+});
 
 export default reducers;
