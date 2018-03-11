@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { getNewsfeed, post } from '../../../redux/asyncActions';
+import { loadNewsfeed } from '../../../redux/actions';
 
 class NewsfeedNewPost extends Component {
 	constructor(props) {
@@ -20,10 +21,18 @@ class NewsfeedNewPost extends Component {
   handlePostChange = (e, content) => this.setState({content});
 
 	post = () => {
-		let post = {content: this.state.content, userId: this.props.match.params.userId}
+		let post = {content: this.state.content, user: this.props.match.params.userId}
 		this.props.post(post)
-		.then((resp)=> resp.json())
-		.then(resp => console.log(resp))
+		.then(resp => resp.json())
+		.then(resp => {
+			if(resp.success) 
+				this.props.getNewsfeed(this.props.match.userId)
+				.then((resp) => resp.json())
+				.then((data) => {
+					this.setState({content: ''});
+					this.props.loadNewsfeed(data.body);
+				});
+		});
 	};
 
 	render() {
@@ -56,6 +65,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   getNewsfeed: (userId) => dispatch(getNewsfeed(userId)),
+  loadNewsfeed: (newsfeed) => dispatch(loadNewsfeed(newsfeed)),
   post: (content) => dispatch(post(content)),
 });
 

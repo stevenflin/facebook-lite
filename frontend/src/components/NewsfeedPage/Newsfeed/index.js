@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import NewsfeedNewPost from './NewsfeedNewPost';
 import NewsfeedPost from './NewsfeedPost';

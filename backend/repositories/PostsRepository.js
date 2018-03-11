@@ -4,7 +4,10 @@ const PostsRepository = {
 
 	findAll: () => {
 		return new Promise((resolve, reject) => {
-			Post.find({}, (error, posts) => {
+			Post.find({})
+			.populate('user')
+			.sort('-date')
+			.exec((error, posts) => {
 				if(error) reject(error);
 				else resolve(posts);
 			});
