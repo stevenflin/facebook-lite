@@ -5,6 +5,7 @@ const PostsRepository = {
 	findAll: () => {
 		return new Promise((resolve, reject) => {
 			Post.find({})
+			.limit(10)
 			.populate('user')
 			.sort('-date')
 			.exec((error, posts) => {
