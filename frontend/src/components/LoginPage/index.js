@@ -35,12 +35,17 @@ class LoginPage extends Component {
   isPasswordEmpty = () => this.state.password === '';
 
   logIn = () => {
-  	this.props.logIn(this.state.username, this.state.password)
-  	.then(resp => resp.json())
-  	.then(resp => {
-  		if(resp.success) this.props.history.push(`/newsfeed/${resp.body._id}`);
-  		else this.props.history.push('/login');
-  	});
+
+  	if(this.state.username === '') return this.props.history.push({
+			pathname: '/login',
+			state: {
+				error: 'username', 
+				message: 'Username doesn\'t match any account.',
+				username: this.state.username,
+			},
+		});
+
+  	this.props.logIn(this.state.username, this.state.password);
   };
 
   goToLandingPage = () => this.props.history.push('/');

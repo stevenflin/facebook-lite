@@ -1,83 +1,39 @@
-// import axios from 'axios';
+import axios from 'axios';
+
+import history from '../history';
+
+import { loadNewsfeed } from './actions';
 
 export const checkIfUsernameExists = (username) => {
-	return dispatch => {
-		return fetch(`${process.env.REACT_APP_API_URL}/users/usernames/${username}`, {
-			method: 'GET',
-	    headers: {
-	      'Content-Type': 'application/json'
-	    },
-		});
-	};
+	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/users/usernames/${username}`);
 };
 
 export const saveUser = (user) => {
-	return dispatch => {
-		return fetch(`${process.env.REACT_APP_API_URL}/users/new`, {
-  		method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user),
-  	});
-	};
+	return dispatch => axios.post(`${process.env.REACT_APP_API_URL}/users/new`, user);
 };
 
 export const logIn = (username, password) => {
-	return dispatch => {
-		return fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
-  		method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({username, password}),
-  	})
-  };
+	return dispatch => axios.post(`${process.env.REACT_APP_API_URL}/users/login`, {username, password})
+		.then(resp => {
+  		if(resp.data.success) history.push(`/newsfeed/${resp.data.body._id}`);
+  		else history.push('/login');
+  	});;
 };
 
-export const getNewsfeed = (userId) => {
-	console.log('hi')
-	return dispatch => {
-		return fetch(`${process.env.REACT_APP_API_URL}/posts`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-	};
+export const fetchNewsfeed = () => {
+	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/posts`)
+		.then(resp => dispatch(loadNewsfeed(resp.data.body)));
 };
 
 export const post = (content) => {
-	return dispatch => {
-		return fetch(`${process.env.REACT_APP_API_URL}/posts/new`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(content),
-		})
-	};
+	return dispatch => axios.post(`${process.env.REACT_APP_API_URL}/posts/new`, content)
+		.then(resp => dispatch(fetchNewsfeed()));
 };
 
 export const comment = (content) => {
-	return dispatch => {
-		return fetch(`${process.env.REACT_APP_API_URL}/comments/new`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(content),
-		})
-	};
+	return dispatch => axios.post(`${process.env.REACT_APP_API_URL}/comments/new`, content);
 };
 
-export const getComments = (postId) => {
-	return dispatch => {
-		return fetch(`${process.env.REACT_APP_API_URL}/comments/post/${postId}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-	};
+export const fetchComments = (postId) => {
+	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/comments/post/${postId}`);
 };

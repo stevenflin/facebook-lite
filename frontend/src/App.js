@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import './css/App.css';
 import './css/SpacingAndSizing.css';
+import history from './history';
 
 // Material-UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -14,6 +15,7 @@ import LandingPage from './components/LandingPage/index';
 import LoginPage from './components/LoginPage/index';
 import NewsfeedPage from './components/NewsfeedPage/index';
 
+// redux
 import reducers from './redux/reducers';
 
 let store = createStore(reducers, applyMiddleware(thunk));
@@ -33,7 +35,7 @@ class App extends Component {
 class Routes extends Component {
 	render() {
 		return (
-				<Router>
+				<Router history={history}>
       		<div>
 			      <Route exact path='/' component={LandingPage} />
             <Route path ='/login' component={LoginPage} />

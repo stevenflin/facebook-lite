@@ -73,10 +73,9 @@ class SignUpForm extends Component {
   	let username = this.state.newUser.username;
   	if(username !== '') {
   		this.props.checkIfUsernameExists(username)
-	  	.then(resp => resp.json())
 	  	.then(resp => {
-	  		if(resp.success) {
-	  			this.setState({isUsernameTaken: resp.exists});
+	  		if(resp.data.success) {
+	  			this.setState({isUsernameTaken: resp.data.exists});
 	  		};
 	  	});
 	  }
@@ -88,14 +87,13 @@ class SignUpForm extends Component {
 
   saveUser = () => {
   	this.props.saveUser(this.state.newUser)
-  	.then(resp => resp.json())
   	.then(resp => {
-  		if(!resp.success) {
+  		if(!resp.data.success) {
   			this.setState({populateErrors: true});
   		}
   		else
   		{
-  			this.props.history.push('/newsfeed');
+  			this.props.history.push(`/newsfeed/${resp.data.body._id}`);
   		};
   	});
   };

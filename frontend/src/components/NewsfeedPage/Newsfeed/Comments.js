@@ -11,8 +11,7 @@ import Chip from 'material-ui/Chip';
 import Comment from './Comment';
 
 // redux
-import { getNewsfeed, getComments, comment } from '../../../redux/asyncActions';
-import { loadNewsfeed } from '../../../redux/actions';
+import { fetchNewsfeed, fetchComments, comment } from '../../../redux/asyncActions';
 
 class Comments extends Component {
 
@@ -30,27 +29,19 @@ class Comments extends Component {
 	comment = () => {
 		let comment = {content: this.state.comment, user: this.props.match.params.userId, post: this.props.postId};
 		this.props.comment(comment)
-		.then(resp => resp.json())
-		.then(resp => {
-			if(resp.success) {
-				this.props.getNewsfeed(this.props.match.userId)
-				.then((resp) => resp.json())
-				.then((data) => {
-					this.setState({comment: ''});
-					this.props.loadNewsfeed(data.body);
-				});
-			}
+		.then((resp) => {
+			if(resp.data.success) 
+				this.fetchComments();
 		});
 	}
 
-	getComments = () => {
-		this.props.getComments(this.props.postId)
-		.then(resp => resp.json())
-		.then(resp => this.setState({comments: resp.body}));
+	fetchComments = () => {
+		this.props.fetchComments(this.props.postId)
+		.then(resp => this.setState({comment: '', comments: resp.data.body}));
 	}
 
 	componentDidMount() {
-		this.getComments();
+		this.fetchComments();
 	}
 
 	render() {
@@ -70,6 +61,7 @@ class Comments extends Component {
 				})}
 				<TextField
 					type='text'
+					value={this.state.comment}
 					onChange={this.handleCommentChange}
 					onKeyPress={(event) => (event.charCode === 13) ? this.comment() : ''}
 					hintText='Comment on this post...'
@@ -87,10 +79,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getNewsfeed: (userId) => dispatch(getNewsfeed(userId)),
-  loadNewsfeed: (newsfeed) => dispatch(loadNewsfeed(newsfeed)),
+  fetchNewsfeed: (userId) => dispatch(fetchNewsfeed(userId)),
   comment: (content) => dispatch(comment(content)),
-  getComments: (postId) => dispatch(getComments(postId)),
+  fetchComments: (postId) => dispatch(fetchComments(postId)),
 });
 
 Comments = connect(mapStateToProps, mapDispatchToProps)(Comments);

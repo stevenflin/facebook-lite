@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import NewsfeedNewPost from './NewsfeedNewPost';
 import NewsfeedPost from './NewsfeedPost';
 
-import { getNewsfeed } from '../../../redux/asyncActions';
-import { loadNewsfeed } from '../../../redux/actions';
+import { fetchNewsfeed } from '../../../redux/asyncActions';
 
 const NewsfeedPresentation = ({newsfeed}) => (
 	<div>
@@ -20,12 +19,8 @@ const NewsfeedPresentation = ({newsfeed}) => (
 
 class Newsfeed extends Component {
 
-	componentWillMount() {
-		let { getNewsfeed, loadNewsfeed } = this.props;
-
-		getNewsfeed(this.props.match.userId)
-		.then((resp) => resp.json())
-		.then((data) => loadNewsfeed(data.body));
+	componentDidMount() {
+		this.props.fetchNewsfeed(this.props.match.userId);
 	}
 
 	render() {
@@ -38,8 +33,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getNewsfeed: (userId) => dispatch(getNewsfeed(userId)),
-  loadNewsfeed: (newsfeed) => dispatch(loadNewsfeed(newsfeed)),
+  fetchNewsfeed: (userId) => dispatch(fetchNewsfeed(userId)),
 });
 
 Newsfeed = connect(mapStateToProps, mapDispatchToProps)(Newsfeed);

@@ -40,10 +40,9 @@ class SignInForm extends Component {
 		});
 
   	checkIfUsernameExists(username)
-  	.then(resp => resp.json())
   	.then(resp => {
-  		if(resp.success) {
-  			if(!resp.exists) history.push({
+  		if(resp.data.success) {
+  			if(!resp.data.exists) history.push({
   				pathname: '/login',
   				state: {
   					error: 'username', 
@@ -51,22 +50,8 @@ class SignInForm extends Component {
   					username,
   				},
   			});
-  			else {
-  				logIn(username, password)
-			  	.then(resp => resp.json())
-			  	.then(resp => {
-			  		if(resp.success) history.push(`/newsfeed/${resp.body._id}`);
-			  		else history.push({
-			  			pathname: '/login',
-			  			state: {
-			  				error: 'password', 
-			  				message: 'Incorrect password.',
-			  				username,
-			  				password,
-			  			},
-			  		});
-			  	});
-  			}
+  			else 
+  				logIn(username, password);
   		};
 	  });
   };
