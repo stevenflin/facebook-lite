@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import ChatBubbleOutline from 'material-ui-icons/ChatBubbleOutline';
 import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
 
-import Comment from './Comment';
+import Comments from './Comments';
 
 const NewsfeedPost = ({post}) => (
 	<div>
@@ -25,7 +25,7 @@ const NewsfeedPost = ({post}) => (
 				</Col>
 			</Row>
 		</Paper>
-		<Comment />
+		<Comments postId={post._id}/>
 		<br/>
 	</div>
 );

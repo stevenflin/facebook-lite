@@ -1,14 +1,13 @@
 import React from 'react';
 
-import Paper from 'material-ui/Paper';
+import Chip from 'material-ui/Chip';
 
-const Comment = () => (
-	<Paper 
-		zDepth={1} 
-		className='newsfeed-post' 
-		style={{backgroundColor: '#fafafa', height: 10, width: '100%'}}
-	>	
-	</Paper>
+const Comment = ({comment}) => (
+	<div className='comment'>
+		<Chip style={{backgroundColor: 'white'}}>	
+			<p className='reset-spacing fss'><strong>{`${comment.firstName} ${comment.lastName}`}</strong> {comment.content}</p>
+		</Chip>
+	</div>
 );
 
 export default Comment;

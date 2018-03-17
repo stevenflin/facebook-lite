@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 
-import Header from './Header/index';
+import SignInForm from './SignInForm/index';
 import Main from './Main/index';
+import Header from '../Reusable/Header';
+import Logo from '../Reusable/Logo';
 
 import '../../css/LandingPage.css';
 
-export default class LandingPage extends Component {
-  render() {
-    return <LandingPagePresentation />;
-  };
-};
+const LandingPage = () => (
+	<div>
+  	<Header>
+  		<Logo />
+  		<SignInForm />
+  	</Header>
+  	<Main />
+	</div>
+);
 
-class LandingPagePresentation extends Component {
-  render() {
-	  return (
-	  	<div>
-	    	<Header />
-	    	<Main />
-	  	</div>
-	  	);
-	};
-};
+export default LandingPage;

@@ -44,6 +44,8 @@ class NewsfeedNewPost extends Component {
 					value={this.state.content}
 					onChange={this.handlePostChange}
 		      floatingLabelText={'What\'s on your mind, Steven?'}
+					floatingLabelFocusStyle={{color:'#4885ed'}}
+					underlineFocusStyle={{borderColor:'#4885ed'}}
 		      inputStyle={{fontSize:'small'}}
 		      style={{width: '100%'}}
 		    />

@@ -6,13 +6,14 @@ import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import Header from '../Reusable/Header';
 import Logo from '../Reusable/Logo';
 
 import { logIn } from '../../redux/asyncActions';
 
 import '../../css/Login.css';
 
-class Login extends Component {
+class LoginPage extends Component {
 	constructor(props) {
 		super(props);
 
@@ -46,12 +47,11 @@ class Login extends Component {
 
 	render() {
 		let params = this.state.error;
-		console.log(params);
 		return (
-				<div className='header'>
-					<Row>
+				<div>
+					<Header>
 						<Logo />
-					</Row>
+					</Header>
 					<Col md={6} className='hc'>
 						<div className='login-form'>
 							<Row><h5 className='hc'>Log into Facebook-lite</h5></Row>
@@ -130,8 +130,8 @@ const mapDispatchToProps = (dispatch) => ({
   logIn: (username, password) => dispatch(logIn(username, password)),
 });
 
-Login = connect(mapStateToProps, mapDispatchToProps)(Login);
+LoginPage = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
-Login = withRouter(Login);
+LoginPage = withRouter(LoginPage);
 
-export default Login;
+export default LoginPage;
