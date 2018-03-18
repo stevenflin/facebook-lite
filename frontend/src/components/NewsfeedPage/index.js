@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import Drawer from 'material-ui/Drawer';
-
 import NavBar from './NavBar';
 import SideBar from './SideBar';
 import Newsfeed from './Newsfeed/index';
+import FriendsList from './FriendsList';
 
 import '../../css/NewsfeedPage.css';
 
@@ -30,13 +29,7 @@ class NewsfeedPagePresentation extends Component {
 		  			</Col>
 		  		</Row>
 		  	</div>
-	  		<Drawer 
-					open={true} 
-					openSecondary={true} 
-					width={200} 
-					containerStyle={{height: '89.55vh', top: '10.45vh', boxShadow: 'none', borderLeft: '1px solid #d3d3d3'}}
-				>
-        </Drawer>
+	  		<FriendsList />
 	  	</div>
 	  	);
 	};

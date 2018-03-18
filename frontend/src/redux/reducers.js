@@ -3,6 +3,7 @@ import {
 	LOAD_NEWSFEED,
 	LOAD_USER,
 	LOAD_PROFILE,
+	LOAD_FRIENDS,
 } from './actionTypes';
 
 const initialState = {
@@ -11,9 +12,19 @@ const initialState = {
 		firstName: '',
 		lastName: '',
 	},
+	friends: [],
 	profile: {
 
 	},
+};
+
+function friendsReducer(state = initialState.friends, action) {
+	switch (action.type) {
+		case LOAD_FRIENDS:
+			return action.friends;
+		default:
+			return state;
+	};
 };
 
 function profileReducer(state = initialState.profile, action) {
@@ -47,6 +58,7 @@ const reducers = combineReducers({
 	newsfeed: newsfeedReducer,
 	user: userReducer,
 	profile: profileReducer,
+	friends: friendsReducer,
 });
 
 export default reducers;

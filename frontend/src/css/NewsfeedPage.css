@@ -32,3 +32,12 @@
 	width: fit-content;
 	border-radius: 20px;
 }
+
+.friend, .contacts {
+  padding: 5px 20px;
+}
+
+.friend:hover {
+  background-color: #fafafa;
+  cursor: pointer; 
+}
