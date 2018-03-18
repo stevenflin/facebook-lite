@@ -5,13 +5,12 @@ import { connect } from 'react-redux'
 // material ui
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
-import Chip from 'material-ui/Chip';
 
 // components
 import Comment from './Comment';
 
 // redux
-import { fetchNewsfeed, fetchComments, comment } from '../../../redux/asyncActions';
+import { fetchComments, comment } from '../../../redux/asyncActions';
 
 class Comments extends Component {
 
@@ -31,17 +30,21 @@ class Comments extends Component {
 		this.props.comment(comment)
 		.then((resp) => {
 			if(resp.data.success) 
-				this.fetchComments();
+				this.fetchComments(this.props.postId);
 		});
 	}
 
-	fetchComments = () => {
-		this.props.fetchComments(this.props.postId)
-		.then(resp => this.setState({comment: '', comments: resp.data.body}));
+	componentDidMount() {
+		this.fetchComments(this.props.postId);
+	};
+
+	componentWillReceiveProps(nextProps) {
+		this.fetchComments(nextProps.postId)
 	}
 
-	componentDidMount() {
-		this.fetchComments();
+	fetchComments = (postId) => {
+		this.props.fetchComments(postId)
+		.then(resp => this.setState({comment: '', comments: resp.data.body}));
 	}
 
 	render() {
@@ -65,6 +68,7 @@ class Comments extends Component {
 					onChange={this.handleCommentChange}
 					onKeyPress={(event) => (event.charCode === 13) ? this.comment() : ''}
 					hintText='Comment on this post...'
+					hintStyle={{fontSize:'small'}}
 		      inputStyle={{fontSize:'small'}}
 		      underlineFocusStyle={{borderColor:'#4885ed'}}
 		      style={{width: '100%'}}
@@ -79,7 +83,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchNewsfeed: (userId) => dispatch(fetchNewsfeed(userId)),
   comment: (content) => dispatch(comment(content)),
   fetchComments: (postId) => dispatch(fetchComments(postId)),
 });

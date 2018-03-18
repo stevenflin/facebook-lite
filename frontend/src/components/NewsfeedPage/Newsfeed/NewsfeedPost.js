@@ -10,9 +10,9 @@ import Comments from './Comments';
 const NewsfeedPost = ({post}) => (
 	<div>
 		<Paper zDepth={1} className='newsfeed-post'>
-			<a href='#'>{`${post.user.firstName} ${post.user.lastName}`}</a>
-			<p className='fss'>{post.date}</p>
-			<p>{post.content}</p>
+			<a className='fss' href='#'>{`${post.user.firstName} ${post.user.lastName}`}</a>
+			<p className='fsxs'>{post.date}</p>
+			<p className='fss'>{post.content}</p>
 			<hr/>
 			<Row className='reset-spacing'>
 				<Col md={6} className='text-align-center'>

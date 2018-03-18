@@ -25,7 +25,7 @@ class NewsfeedPagePresentation extends Component {
 		  			<Col md={2}>
 		  				<SideBar />
 		  			</Col>
-		  			<Col md={7}>
+		  			<Col md={5}>
 		  				<Newsfeed />
 		  			</Col>
 		  		</Row>
