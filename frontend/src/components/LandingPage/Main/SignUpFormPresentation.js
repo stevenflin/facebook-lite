@@ -118,7 +118,7 @@ const SignUpFormPresentation = ({
 		  <Row>
 		  	<Col className='reset-spacing fsl' md={4}>Birthday </Col>
 		  	<Col className='fsxs' md={6}>
-		  		<a href='#' onClick={handleBdayTip}>Why do I need to provide my birthday?</a>
+		  		<a href='/#' onClick={handleBdayTip}>Why do I need to provide my birthday?</a>
 		  	</Col>
 		  	<Popover
           open={open}
@@ -132,7 +132,7 @@ const SignUpFormPresentation = ({
           	get the right Facebook experience for your age. <br/>
           	If you want to change who sees this, go to the <br/>
           	About section of your profile. For more details, <br/>
-          	please visit our <a href='#'>Data Policy</a>.
+          	please visit our <a href='/#'>Data Policy</a>.
           </p>
         </Popover>
 		  </Row>
@@ -186,8 +186,8 @@ const SignUpFormPresentation = ({
 		  </Row>
 		  <Row>
 		  	<p className='fsxs'>
-		  		By clicking Create Account, you agree to our <a href='#'>Terms</a> and that <br/>
-		  		you have read our <a href='#'>Data Policy</a>, including our <a href='#'>Cookie Use</a>. You <br/>
+		  		By clicking Create Account, you agree to our <a href='/#'>Terms</a> and that <br/>
+		  		you have read our <a href='/#'>Data Policy</a>, including our <a href='/#'>Cookie Use</a>. You <br/>
 		  		may receive SMS Notifications from Facebook and can opt out <br/>
 		  		at any time.
 		  	</p>
