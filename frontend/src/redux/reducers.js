@@ -5,6 +5,8 @@ import {
 	LOAD_PROFILE,
 	LOAD_FRIENDS,
 	LOAD_NEXT_TEN,
+	ADD_CHAT_BOX,
+	REMOVE_CHAT_BOX,
 } from './actionTypes';
 
 const initialState = {
@@ -14,9 +16,8 @@ const initialState = {
 		lastName: '',
 	},
 	friends: [],
-	profile: {
-
-	},
+	profile: {},
+	chats: [],
 };
 
 function friendsReducer(state = initialState.friends, action) {
@@ -57,11 +58,23 @@ function newsfeedReducer(state = initialState.newsfeed, action) {
   };
 };
 
+function chatsReducer(state = initialState.chats, action) {
+	switch (action.type) {
+		case ADD_CHAT_BOX:
+			return state.concat(action.user);
+		case REMOVE_CHAT_BOX:
+			return;
+		default:
+			return state;
+	}
+}
+
 const reducers = combineReducers({
 	newsfeed: newsfeedReducer,
 	user: userReducer,
 	profile: profileReducer,
 	friends: friendsReducer,
+	chats: chatsReducer,
 });
 
 export default reducers;
