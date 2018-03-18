@@ -14,6 +14,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import LandingPage from './components/LandingPage/index';
 import LoginPage from './components/LoginPage/index';
 import NewsfeedPage from './components/NewsfeedPage/index';
+import ProfilePage from './components/ProfilePage/index';
 
 // redux
 import reducers from './redux/reducers';
@@ -40,6 +41,7 @@ class Routes extends Component {
 			      <Route exact path='/' component={LandingPage} />
             <Route path ='/login' component={LoginPage} />
 			      <Route path='/newsfeed/:userId' component={NewsfeedPage} />
+            <Route path='/profile/:userId' component={ProfilePage} />
 			    </div>
 			  </Router>
 			);

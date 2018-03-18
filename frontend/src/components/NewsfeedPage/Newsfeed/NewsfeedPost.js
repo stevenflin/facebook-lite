@@ -10,7 +10,7 @@ import Comments from './Comments';
 const NewsfeedPost = ({post}) => (
 	<div>
 		<Paper zDepth={1} className='newsfeed-post'>
-			<a className='fss' href='/#'>{`${post.user.firstName} ${post.user.lastName}`}</a>
+			<a className='fss' href={`/profile/${post.user._id}`}>{`${post.user.firstName} ${post.user.lastName}`}</a>
 			<p className='fsxs'>{post.date}</p>
 			<p className='fss'>{post.content}</p>
 			<hr/>

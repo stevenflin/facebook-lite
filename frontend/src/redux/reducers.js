@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import {
 	LOAD_NEWSFEED,
 	LOAD_USER,
+	LOAD_PROFILE,
 } from './actionTypes';
 
 const initialState = {
@@ -10,6 +11,18 @@ const initialState = {
 		firstName: '',
 		lastName: '',
 	},
+	profile: {
+
+	},
+};
+
+function profileReducer(state = initialState.profile, action) {
+	switch (action.type) {
+		case LOAD_PROFILE:
+			return action.profile;
+		default:
+			return state;
+	};
 };
 
 function userReducer(state = initialState.user, action) {
@@ -33,6 +46,7 @@ function newsfeedReducer(state = initialState.newsfeed, action) {
 const reducers = combineReducers({
 	newsfeed: newsfeedReducer,
 	user: userReducer,
+	profile: profileReducer,
 });
 
 export default reducers;
