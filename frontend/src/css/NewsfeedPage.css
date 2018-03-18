@@ -13,6 +13,10 @@
   font-size: small;
 }
 
+.side-bar-option {
+
+}
+
 .newsfeed-post-new {
   padding: 0 2vh 2vh 2vh;
 }
@@ -23,4 +27,8 @@
 
 .comment {
 	margin-bottom: 5px;
+	background-color: white;
+	padding: 5px 10px;
+	width: fit-content;
+	border-radius: 20px;
 }
