@@ -41,3 +41,16 @@
   background-color: #fafafa;
   cursor: pointer; 
 }
+
+.view-more-posts {
+  color: #4885ed;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+
+.view-more-posts:hover {
+  border-bottom: 1px solid #4885ed;
+  cursor: pointer;
+};
+

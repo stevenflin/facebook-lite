@@ -10,6 +10,14 @@ const PostsService = {
 	  });
 	},
 
+	findNext10: (date) => {
+		return new Promise((resolve, reject) => {
+			PostsRepository.findNext10(date)
+			.then(posts => resolve({success: true, body: posts}))
+	  	.catch(error => reject({success: false, error}));
+	  });
+	},
+
 	create: (post) => {
 		return new Promise((resolve, reject) => {
 			PostsRepository.create(post)

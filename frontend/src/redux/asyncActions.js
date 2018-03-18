@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import history from '../history';
 
-import { loadNewsfeed, loadFriends } from './actions';
+import { loadNewsfeed, loadFriends, loadNext10 } from './actions';
 
 export const checkIfUsernameExists = (username) => {
 	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/users/usernames/${username}`);
@@ -24,6 +24,11 @@ export const fetchNewsfeed = () => {
 	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/posts`)
 	.then(resp => dispatch(loadNewsfeed(resp.data.body)));
 };
+
+export const fetchNext10 = (date) => {
+	return dispatch => axios.post(`${process.env.REACT_APP_API_URL}/posts/next`, {date})
+	.then(resp => dispatch(loadNext10(resp.data.body)));
+}
 
 export const post = (content) => {
 	return dispatch => axios.post(`${process.env.REACT_APP_API_URL}/posts/new`, content)

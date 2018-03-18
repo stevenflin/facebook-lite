@@ -4,6 +4,7 @@ import {
 	LOAD_USER,
 	LOAD_PROFILE,
 	LOAD_FRIENDS,
+	LOAD_NEXT_TEN,
 } from './actionTypes';
 
 const initialState = {
@@ -49,6 +50,8 @@ function newsfeedReducer(state = initialState.newsfeed, action) {
   switch (action.type) {
     case LOAD_NEWSFEED:
       return action.newsfeed;
+    case LOAD_NEXT_TEN:
+    	return state.concat(action.posts);
     default:
       return state;
   };

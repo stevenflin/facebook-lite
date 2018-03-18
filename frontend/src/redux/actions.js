@@ -3,6 +3,7 @@ import {
 	LOAD_USER,
 	LOAD_PROFILE,
 	LOAD_FRIENDS,
+	LOAD_NEXT_TEN,
 } from './actionTypes';
 
 export const loadNewsfeed = (newsfeed) => ({
@@ -23,4 +24,9 @@ export const loadProfile = (profile) => ({
 export const loadFriends = (friends) => ({
 	type: LOAD_FRIENDS,
 	friends,
+});
+
+export const loadNext10 = (posts) => ({
+	type: LOAD_NEXT_TEN,
+	posts,
 });

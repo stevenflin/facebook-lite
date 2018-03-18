@@ -9,6 +9,12 @@ router.get('/', (req, res, next) => {
 	.catch(responseFailure => res.json(responseFailure));
 });
 
+router.post('/next', (req, res, next) => {
+	PostsService.findNext10(req.body.date)
+	.then(responseSuccess => res.json(responseSuccess))
+	.catch(responseFailure => res.json(responseFailure));
+});
+
 router.post('/new', (req, res, next) => {
 	PostsService.create(req.body)
 	.then(responseSuccess => res.json(responseSuccess))
