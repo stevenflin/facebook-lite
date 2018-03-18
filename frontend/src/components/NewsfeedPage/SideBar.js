@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class SideBar extends Component {
+class SideBar extends Component {
+
 	render() {
 		return (
 			<div className='side-bar'>
-				<p>Steven Lin</p>
-
+				<p className='mv5 side-bar-option'>{this.props.displayName}</p>
+				<p className='mv5 side-bar-option'>Newsfeed</p>
 			</div>
 			);
 	};
 };
+
+const mapStateToProps = (state) => ({
+  displayName: `${state.user.firstName} ${state.user.lastName}`,
+});
+
+SideBar = connect(mapStateToProps)(SideBar);
+
+export default SideBar;

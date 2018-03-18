@@ -37,3 +37,7 @@ export const comment = (content) => {
 export const fetchComments = (postId) => {
 	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/comments/post/${postId}`);
 };
+
+export const fetchUser = (userId) => {
+	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`);
+}

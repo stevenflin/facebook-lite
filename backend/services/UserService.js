@@ -17,7 +17,15 @@ const UserService = {
 				(user) ? resolve({success: true, exists: true}) : resolve({success: true, exists: false});
 			})
 			.catch(error => reject({success: false, error}));
-		})
+		});
+	},
+
+	findById: (userId) => {
+		return new Promise((resolve, reject) => {
+			UserRepository.findById(userId)
+			.then(user => resolve({success: true, body: user}))
+	  	.catch(error => reject({success: false, error}));
+		});
 	},
 
 	login: (username, password) => {

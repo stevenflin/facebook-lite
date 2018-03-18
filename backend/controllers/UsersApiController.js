@@ -9,6 +9,12 @@ router.get('/', (req, res, next) => {
 	.catch(responseFailure => res.json(responseFailure));
 });
 
+router.get('/:userId', (req, res, next) => {
+	UserService.findById(req.params.userId)
+	.then(responseSuccess => res.json(responseSuccess))
+	.catch(responseFailure => res.json(responseFailure));
+});
+
 router.get('/usernames/:username', (req, res, next) => {
 	UserService.checkIfUsernameExists(req.params.username)
 	.then(responseSuccess => res.json(responseSuccess))

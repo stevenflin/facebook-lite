@@ -20,7 +20,7 @@ class NewsfeedPagePresentation extends Component {
 	  return (
 	  	<div>
 	  		<NavBar />
-	  		<div className='newsfeed-main p10'>
+	  		<div className='newsfeed-main p20'>
 		  		<Row>
 		  			<Col md={2}>
 		  				<SideBar />

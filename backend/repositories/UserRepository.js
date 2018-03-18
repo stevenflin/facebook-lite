@@ -11,6 +11,15 @@ const UserRepository = {
 		});
 	},
 
+	findById: (userId) => {
+		return new Promise((resolve, reject) => {
+			User.findById(userId, (error, user) => { 
+				if(error) reject(error);
+				else resolve(user);
+			});
+		});
+	},
+
 	findByUsername: (username) => {
 		return new Promise((resolve, reject) => {
 			User.findOne({username}, (error, user) => { 

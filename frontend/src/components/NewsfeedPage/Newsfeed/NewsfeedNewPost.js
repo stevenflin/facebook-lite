@@ -33,7 +33,7 @@ class NewsfeedNewPost extends Component {
 					type='text'
 					value={this.state.content}
 					onChange={this.handlePostChange}
-		      floatingLabelText={'What\'s on your mind, Steven?'}
+		      floatingLabelText={`What's on your mind, ${this.props.firstName}?`}
 					floatingLabelFocusStyle={{color:'#4885ed'}}
 					underlineFocusStyle={{borderColor:'#4885ed'}}
 		      inputStyle={{fontSize:'small'}}
@@ -51,9 +51,9 @@ class NewsfeedNewPost extends Component {
 	};
 };
 
-const mapStateToProps = (state) => {
-  return {};
-};
+const mapStateToProps = (state) => ({
+  firstName: state.user.firstName,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   post: (content) => dispatch(post(content)),

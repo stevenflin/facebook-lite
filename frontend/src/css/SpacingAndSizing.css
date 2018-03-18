@@ -19,8 +19,16 @@
 	padding: 10px;
 }
 
+.p20{
+	padding: 20px;
+}
+
 .ph10 {
 	padding: 0 10px;
+}
+
+.mv5 {
+	margin: 5px 0;
 }
 
 .text-align-center {
