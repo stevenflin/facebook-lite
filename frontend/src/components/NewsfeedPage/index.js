@@ -5,6 +5,7 @@ import NavBar from './NavBar';
 import SideBar from './SideBar';
 import Newsfeed from './Newsfeed/index';
 import FriendsList from './FriendsList';
+import Chats from './Chats/index';
 
 import '../../css/NewsfeedPage.css';
 
@@ -29,6 +30,7 @@ class NewsfeedPagePresentation extends Component {
 		  			</Col>
 		  		</Row>
 		  	</div>
+		  	<Chats />
 	  		<FriendsList />
 	  	</div>
 	  	);
