@@ -63,7 +63,7 @@ function chatsReducer(state = initialState.chats, action) {
 		case ADD_CHAT_BOX:
 			return state.concat(action.user);
 		case REMOVE_CHAT_BOX:
-			return;
+			return state.filter(chat => chat._id !== action.userId);
 		default:
 			return state;
 	}

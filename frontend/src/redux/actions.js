@@ -38,7 +38,7 @@ export const addChatBox = (user) => ({
 	user,
 });
 
-export const removeChatBox = (user) => ({
-	type: ADD_CHAT_BOX,
-	user,
+export const removeChatBox = (userId) => ({
+	type: REMOVE_CHAT_BOX,
+	userId,
 });

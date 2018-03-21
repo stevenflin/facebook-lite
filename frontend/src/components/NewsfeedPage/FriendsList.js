@@ -8,7 +8,7 @@ import Avatar from 'material-ui/Avatar';
 
 // redux
 import { fetchFriends } from '../../redux/asyncActions';
-import { addChatBox } from '../../redux/actions';
+import { addChatBox, removeChatBox } from '../../redux/actions';
 
 class FriendsList extends Component {
 
@@ -16,7 +16,8 @@ class FriendsList extends Component {
 		this.props.dispatch(fetchFriends());
 	};
 
-	addChatBox = (friend) => {
+	handleFriendClick = (friend) => {
+		this.props.dispatch(removeChatBox(friend._id));
 		this.props.dispatch(addChatBox(friend));
 	};
 
@@ -35,7 +36,7 @@ class FriendsList extends Component {
 				<div>
 					<p className='reset-spacing fss contacts'><strong>CONTACTS</strong></p>
 					{this.props.friends.map((friend,index) => (
-						<div key={index} className='friend' onClick={()=>this.addChatBox(friend)}>
+						<div key={index} className='friend' onClick={()=>this.handleFriendClick(friend)}>
 							<Avatar backgroundColor={randomMC.getColor()} className='vam' style={{marginRight: 5}} size={30}>{friend.firstName[0]}</Avatar>
 							<span className='reset-spacing fss vam'>{`${friend.firstName} ${friend.lastName}`}</span>
 						</div>
@@ -49,6 +50,7 @@ class FriendsList extends Component {
 
 const mapStateToProps = (state) => ({
   friends: state.friends,
+  chats: state.chats,
 });
 
 const mapDispatchToProps = (dispatch) => ({

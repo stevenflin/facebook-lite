@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import ScrollArea from 'react-scrollbar';
@@ -8,6 +9,7 @@ import TextField from 'material-ui/TextField';
 
 // redux
 import { fetchMessages, sendMessage } from '../../../redux/asyncActions';
+import { removeChatBox } from '../../../redux/actions';
 
 class Chat extends Component {
 
@@ -22,11 +24,15 @@ class Chat extends Component {
   };
 
   componentDidMount() {
-  	this.fetchMessages();
+  	this.fetchMessages(this.props.chat._id);
   };
 
-  fetchMessages = () => {
-  	this.props.dispatch(fetchMessages(this.props.match.params.userId, this.props.chat._id))
+  componentWillReceiveProps(nextProps) {
+  	this.fetchMessages(nextProps.chat._id);
+  }
+
+  fetchMessages = (chatId) => {
+  	this.props.dispatch(fetchMessages(this.props.match.params.userId, chatId))
   	.then(resp => this.setState({message: '', messages: resp.data.body}));
   };
 
@@ -44,14 +50,18 @@ class Chat extends Component {
   	.then(resp => this.fetchMessages());
   };
 
+  close = () => {
+  	this.props.dispatch(removeChatBox(this.props.chat._id))
+  }
+
 	render() {
-		console.log(this.state.messages);
 		const display = (this.state.open) 
 		? (
 			<div className='chat'>
-				<div className='chat-header' onClick={this.toggleChat}>
-					{this.props.chat.firstName}
-				</div>
+				<Row className='reset-spacing chat-header'>
+					<Col md={11} className='reset-spacing' onClick={this.toggleChat}>{this.props.chat.firstName}</Col>
+					<Col md={1} className='reset-spacing text-align-center' onClick={this.close}>x</Col>
+				</Row>
 				<ScrollArea
 	        speed={0.8}
 	        className='chat-box'

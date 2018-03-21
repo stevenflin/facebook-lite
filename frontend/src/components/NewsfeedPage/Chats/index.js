@@ -11,6 +11,7 @@ import Chat from './Chat';
 class Chats extends Component {
 
 	render() {
+		console.log('[CHATS]', this.props.chats);
 		return (
 			<div className='chats'>
 				{this.props.chats.map((chat,index) => <Chat key={index} chat={chat} />)}
