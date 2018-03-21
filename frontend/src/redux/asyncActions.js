@@ -51,3 +51,11 @@ export const fetchFriends = () => {
 	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/users`)
 	.then(resp => dispatch(loadFriends(resp.data.body)));
 };
+
+export const fetchMessages = (userId1, userId2) => {
+	return dispatch => axios.get(`${process.env.REACT_APP_API_URL}/messages/user1/${userId1}/user2/${userId2}`);
+};
+
+export const sendMessage = (content) => {
+	return dispatch => axios.post(`${process.env.REACT_APP_API_URL}/messages/new`, content);
+};

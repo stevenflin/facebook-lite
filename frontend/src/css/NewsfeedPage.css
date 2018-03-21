@@ -109,7 +109,8 @@
 
 .from-message {
   margin-bottom: 5px;
-  background-color: #f6f6f6;
+  background-color: #4885ed;  
+  color: white;
   padding: 5px 10px;
   border-radius: 20px;
   max-width: 80%;
@@ -118,8 +119,7 @@
 
 .to-message {
   margin-bottom: 5px;
-  background-color: #4885ed;
-  color: white;
+  background-color: #f6f6f6;
   padding: 5px 10px;
   border-radius: 20px;
   max-width: 80%;

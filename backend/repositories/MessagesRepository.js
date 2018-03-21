@@ -2,10 +2,15 @@ var Message = require('../models/message');
 
 const MessagesRepository = {
 
-	findByUser: (userId) => {
+	findByUser: (userId1, userId2) => {
 		return new Promise((resolve, reject) => {
-			Message.find({$or: [{to: userId}, {from: userId}]})
-			.sort('-date')
+			Message.find({
+				$or: [{
+					$and: [{to: userId1}, {from: userId2}]
+				}, {
+					$and: [{to: userId2}, {from: userId1}]
+				}]
+			})
 			.limit(20)
 			.exec((error, messages) => {
 				if(error) reject(error);

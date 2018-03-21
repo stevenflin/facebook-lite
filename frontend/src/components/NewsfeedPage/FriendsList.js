@@ -35,9 +35,9 @@ class FriendsList extends Component {
 				<div>
 					<p className='reset-spacing fss contacts'><strong>CONTACTS</strong></p>
 					{this.props.friends.map((friend,index) => (
-						<div className='friend' onClick={()=>this.addChatBox(friend)}>
-						<Avatar backgroundColor={randomMC.getColor()} className='vam' style={{marginRight: 5}} size={30}>{friend.firstName[0]}</Avatar>
-						<span className='reset-spacing fss vam'>{`${friend.firstName} ${friend.lastName}`}</span>
+						<div key={index} className='friend' onClick={()=>this.addChatBox(friend)}>
+							<Avatar backgroundColor={randomMC.getColor()} className='vam' style={{marginRight: 5}} size={30}>{friend.firstName[0]}</Avatar>
+							<span className='reset-spacing fss vam'>{`${friend.firstName} ${friend.lastName}`}</span>
 						</div>
 						)
 					)}
