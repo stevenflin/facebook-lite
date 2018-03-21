@@ -6,6 +6,7 @@ import {
 	LOAD_NEXT_TEN,
 	ADD_CHAT_BOX,
 	REMOVE_CHAT_BOX,
+	TOGGLE_CHAT,
 } from './actionTypes';
 
 export const loadNewsfeed = (newsfeed) => ({
@@ -38,7 +39,12 @@ export const addChatBox = (user) => ({
 	user,
 });
 
-export const removeChatBox = (userId) => ({
+export const removeChatBox = (index) => ({
 	type: REMOVE_CHAT_BOX,
-	userId,
+	index,
+});
+
+export const toggleChat = (index) => ({
+	type: TOGGLE_CHAT,
+	index
 });

@@ -7,6 +7,7 @@ import {
 	LOAD_NEXT_TEN,
 	ADD_CHAT_BOX,
 	REMOVE_CHAT_BOX,
+	TOGGLE_CHAT,
 } from './actionTypes';
 
 const initialState = {
@@ -63,7 +64,14 @@ function chatsReducer(state = initialState.chats, action) {
 		case ADD_CHAT_BOX:
 			return state.concat(action.user);
 		case REMOVE_CHAT_BOX:
-			return state.filter(chat => chat._id !== action.userId);
+			let returnObj = state.slice(0,action.index).concat(state.slice(action.index+1));
+			for(let i = action.index; i < returnObj.length; i++) {
+				returnObj[i].index = i;
+			}
+			return returnObj;
+		case TOGGLE_CHAT:
+			let chat = Object.assign({}, state[action.index], {open: !state[action.index].open})
+			return state.slice(0,action.index).concat(chat).concat(state.slice(action.index+1));
 		default:
 			return state;
 	}

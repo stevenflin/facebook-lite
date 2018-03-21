@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField';
 
 // redux
 import { fetchMessages, sendMessage } from '../../../redux/asyncActions';
-import { removeChatBox } from '../../../redux/actions';
+import { removeChatBox, toggleChat } from '../../../redux/actions';
 
 class Chat extends Component {
 
@@ -17,7 +17,6 @@ class Chat extends Component {
 		super(props);
 
     this.state = {
-    	open: true,
     	message: '',
     	messages: [],
     };
@@ -36,7 +35,7 @@ class Chat extends Component {
   	.then(resp => this.setState({message: '', messages: resp.data.body}));
   };
 
-  toggleChat = () => this.setState({open: !this.state.open});
+  toggleChat = () => this.props.dispatch(toggleChat(this.props.chat.index));
 
   handleMessageChange = (e, message) => this.setState({message});
 
@@ -47,19 +46,19 @@ class Chat extends Component {
   		from: this.props.match.params.userId,
   	};
   	this.props.dispatch(sendMessage(message))
-  	.then(resp => this.fetchMessages());
+  	.then(resp => this.fetchMessages(this.props.chat._id));
   };
 
   close = () => {
-  	this.props.dispatch(removeChatBox(this.props.chat._id))
+  	this.props.dispatch(removeChatBox(this.props.chat.index))
   }
 
 	render() {
-		const display = (this.state.open) 
+		const display = (this.props.chat.open) 
 		? (
 			<div className='chat'>
 				<Row className='reset-spacing chat-header'>
-					<Col md={11} className='reset-spacing' onClick={this.toggleChat}>{this.props.chat.firstName}</Col>
+					<Col md={11} className='reset-spacing' onClick={this.toggleChat}>{this.props.chat.name}</Col>
 					<Col md={1} className='reset-spacing text-align-center' onClick={this.close}>x</Col>
 				</Row>
 				<ScrollArea
@@ -91,9 +90,10 @@ class Chat extends Component {
 			</div>
 			) 
 		: (
-			<div className='chat-min' onClick={this.toggleChat}>
-				{this.props.chat.firstName}
-			</div>
+			<Row className='reset-spacing chat-min'>
+				<Col md={11} className='reset-spacing' onClick={this.toggleChat}>{this.props.chat.name}</Col>
+				<Col md={1} className='reset-spacing text-align-center' onClick={this.close}>x</Col>	
+			</Row>
 			);
 
 		return (
