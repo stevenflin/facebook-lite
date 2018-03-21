@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import ScrollArea from 'react-scrollbar';
 
 // material ui
 import TextField from 'material-ui/TextField';
@@ -51,7 +52,11 @@ class Chat extends Component {
 				<div className='chat-header' onClick={this.toggleChat}>
 					{this.props.chat.firstName}
 				</div>
-				<div className='chat-box'>
+				<ScrollArea
+	        speed={0.8}
+	        className='chat-box'
+	        horizontal={false}
+	      >
 					{this.state.messages.map(message => {
 						let className = (message.from === this.props.match.params.userId)
 						? 'from-message mv10' : 'to-message mv10'
@@ -61,7 +66,7 @@ class Chat extends Component {
 							</div>
 							)
 					})}
-				</div>
+				</ScrollArea>
 				<TextField
 					type='text'
 					value={this.state.message}
